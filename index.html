@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Piano by Vue.js</title>
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+  
+<div id="app">
+  <div class="audioplayer" v-for="s in sounddata">
+    <audio v-bind:data-num="s.number">
+      <source v-bind:src="s.url"/>
+    </audio>
+  </div>
+  <div class="centerBox">
+    <h2>Vue.js Piano Project</h2>
+    <div class="keyboard">
+      <div class="pianokey" v-for="s in displayKeys">
+        <div class="white" v-if="s.type == 'white'" v-on:click="addnote(s.num)" v-bind:class="playingTime &amp;&amp; getCurrentHighlight(s.num, s.key) ? &quot;playing&quot; : &quot;&quot;"> 
+          <div class="label">{{ String.fromCharCode(s.key) }}</div>
+        </div>
+        <div class="black" v-if="s.type == 'black'" v-on:click="addnote(s.num)" v-bind:class="playingTime &amp;&amp; getCurrentHighlight(s.num, s.key) ? &quot;playing&quot; : &quot;&quot;"> 
+          <div class="label">{{ String.fromCharCode(s.key) }}</div>
+        </div>
+      </div>
+    </div><br/>
+    <div class="controls">
+      <ul class="notesList" v-if="notes.length &gt; 0">
+        <li v-for="(note, id) in notes" v-bind:class="nowNoteId - 1 == id ? &quot;playing&quot; : &quot;&quot;">
+          <div class="num" v-on:mouseover="playnote(note.num, 1)">{{ note.num }}</div>
+          <div class="time">{{ note.time }}</div>
+        </li>
+      </ul>
+      <button v-on:click="loadSample">Sample    </button>
+      <button v-on:click="playnext(1)">Playnext</button>
+      <button v-if="playingTime &lt;= 1" v-on:click="startplay">Start<i class="fa fa-play"></i></button>
+      <button v-if="playingTime &gt; 1" v-on:click="stopplay">Stop<i class="fa fa-pause"></i></button>
+      <button v-if="recordTime &lt;= 0" v-on:click="startRecord">Record<i class="fa fa-circle"></i></button>
+      <button v-if="recordTime &gt;= 1" v-on:click="stopRecord">StopRecord<i class="fa fa-stop"></i></button>
+      <button v-on:click="notes = []">Clear</button>
+      <h4>{{ playingTime + recordTime }}</h4>
+    </div>
+  </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js'></script>
+<script  src="js/index.js"></script>
+</body>
+</html>

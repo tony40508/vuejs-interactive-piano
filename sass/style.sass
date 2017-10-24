@@ -1,0 +1,116 @@
+$color_white: #eee
+$color_black: #585858
+$key_width: 44px
+$key_height: 300px
+
+@mixin size($w,$h)
+  width: $w
+  height: $h
+
+* 
+  vertical-align: top
+  font-family: 微軟正黑體
+  backface-visibility: hidden // transform 預設是 3D （避免播放時糊掉的狀況）
+  
+html,body
+  +size(100%,100%)
+  margin: 0
+  padding: 0
+  
+h2
+  margin-bottom: 30px
+  color: $color_black
+  
+button
+  background-color: transparent
+  border: solid 1px
+  padding: 4px 12px
+  border-radius: 4px
+  transition: 0.5s 0.1s
+  cursor: pointer
+  vertical-align: middle
+  &:hover
+    background-color: $color_black
+    color: white
+  
+.notesList
+  li
+    display: inline-block
+    border-right: solid 1px
+    padding: 2px 5px
+    cursor: pointer
+    transition: 0.3s
+    &:hover
+      background-color: darken($color_white, 5)
+    // li 本體的 .playing （針對本體操作）而不是裡面的，也可以在外面寫成 li.playing
+    &.playing 
+      background-color: darken($color_white, 10)
+    .time
+      font-size: 8px
+      opacity: 0.3
+  
+.centerBox
+  position: absolute
+  left: 50%
+  top: 50%
+  transform: translate(-50%, -50%)
+  text-align: center // 因為 display: inline-block (跟著文字一起排列)
+  width: 100%
+  
+.keyboard
+  box-shadow: 0px 0px 40px -5px rgba(0,0,0,0.4)
+  display: inline-block // 對著裡面的內容排列
+  margin-bottom: 30px
+  
+.pianokey
+  display: inline-block
+  position: relative
+  cursor: pointer
+  
+.white.playing
+  background-color: darken($color_white, 10)
+  transform: translate(0px, 0px)
+  
+.white
+  +size($key_width, $key_height)
+  border: solid 1px $color_white
+  background-color: #fff
+  transform: translate(-3px, -3px)
+  transition: 0.1s 
+  &:hover
+    transform: translate(0px, 0px)
+    background-color: $color_white
+  
+.black.playing
+  background-color: lighten($color_black, 10)
+  transform: translate(0px, 0px)
+  
+.black
+  position: absolute
+  top: 0px
+  z-index: 3 // 一定要用 position: absolute
+  width: $key_width / 2
+  height: $key_height * 0.55
+  background-color: $color_black
+  margin-left: - $key_width / 4
+  margin-right: - $key_width / 4
+  transform: translate(-3px, -3px)
+  transition: 0.1s 
+  &:hover
+    transform: translate(0px, 0px)
+    background-color: darken($color_black, 10)
+  
+.label
+  position: absolute
+  color: rgba($color_black, 0.5)
+  bottom: -25px
+  left: 50%
+  transform: translate(-50%)
+  font-size: 8px
+  
+i
+  margin-left: 8px
+  margin-right: 0px
+  margin-top: 3px
+i.fa-circle
+  color: darken(red,10)
