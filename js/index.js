@@ -32,7 +32,7 @@ var keys = [
 for(var i = 0; i < soundIndex.length; i++) {
   soundpack.push({
     number: soundIndex[i],
-    url: "../src/" + soundIndex[i] + ".wav"
+    url: "http://awiclass.monoame.com/pianosound/set/" + soundIndex[i] + ".wav"
   });
 }
 
@@ -135,8 +135,7 @@ var vm = new Vue({
     loadSample: function() {
       var vObj = this;
       $.ajax({
-        url: "../dodoro.json",
-        type: "GET",
+        url: "https://awiclass.monoame.com/api/command.php?type=get&name=music_dodoro",
         success: function(res) {
           vObj.notes = res;
         }
