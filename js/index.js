@@ -137,7 +137,7 @@ var vm = new Vue({
       $.ajax({
         url: "https://awiclass.monoame.com/api/command.php?type=get&name=music_dodoro",
         success: function(res) {
-          vObj.notes = res;
+          vObj.notes = JSON.parse(res);
         }
       });
     }
