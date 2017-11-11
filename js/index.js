@@ -32,7 +32,7 @@ var keys = [
 for(var i = 0; i < soundIndex.length; i++) {
   soundpack.push({
     number: soundIndex[i],
-    url: "../src/" + soundIndex[i] + ".mp3"
+    url: "src/" + soundIndex[i] + ".mp3"
   });
 }
 
