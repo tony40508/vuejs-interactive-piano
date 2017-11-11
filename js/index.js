@@ -32,7 +32,7 @@ var keys = [
 for(var i = 0; i < soundIndex.length; i++) {
   soundpack.push({
     number: soundIndex[i],
-    url: "http://awiclass.monoame.com/pianosound/set/" + soundIndex[i] + ".wav"
+    url: "../src/" + soundIndex[i] + ".wav"
   });
 }
 
